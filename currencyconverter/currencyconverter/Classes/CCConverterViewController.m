@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSMutableArray *currencyArray;
+@property (nonatomic, strong) UITextField *originalCurrency;
+@property (nonatomic, strong) UITextField *finalCurrency;
 
 @end
 
@@ -41,6 +43,12 @@
     // XXX 162 is default size of picker view
     self.pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
     [self.view addSubview:self.pickerView];
+    
+    self.originalCurrency.frame = CGRectMake(self.view.frame.origin.x + 20, 100, self.view.frame.size.width / 2 - 30, 50);
+    self.finalCurrency.frame = CGRectMake(self.originalCurrency.frame.origin.x + self.originalCurrency.frame.size.width + 20, self.originalCurrency.frame.origin.y, self.originalCurrency.frame.size.width, self.originalCurrency.frame.size.height);
+    [self.view addSubview:self.originalCurrency];
+    [self.view addSubview:self.finalCurrency];
+    
     
 }
 
@@ -88,6 +96,30 @@
     }
     
     return _pickerView;
+}
+
+- (UITextField *) originalCurrency {
+    if (!_originalCurrency) {
+        _originalCurrency = [[UITextField alloc] init];
+        [_originalCurrency setFont:[UIFont systemFontOfSize:16]];
+        [_originalCurrency setPlaceholder:@"Original Amount"];
+        [_originalCurrency setKeyboardType:UIKeyboardTypeDecimalPad];
+        [_originalCurrency setBorderStyle:UITextBorderStyleRoundedRect];
+    }
+    
+    return _originalCurrency;
+}
+
+- (UITextField *) finalCurrency {
+    if (!_finalCurrency) {
+        _finalCurrency = [[UITextField alloc] init];
+        [_finalCurrency setFont:[UIFont systemFontOfSize:16]];
+        [_finalCurrency setPlaceholder:@"Final Amount"];
+        [_finalCurrency setKeyboardType:UIKeyboardTypeDecimalPad];
+        [_finalCurrency setBorderStyle:UITextBorderStyleRoundedRect];
+    }
+    
+    return _finalCurrency;
 }
 
 @end
