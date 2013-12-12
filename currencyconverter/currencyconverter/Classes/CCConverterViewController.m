@@ -13,8 +13,9 @@
 
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSMutableArray *currencyArray;
-@property (nonatomic, strong) UITextField *originalCurrency;
-@property (nonatomic, strong) UITextField *finalCurrency;
+@property (nonatomic, strong) UITextField *originalCurrencyTextField;
+@property (nonatomic, strong) UITextField *finalCurrencyTextField;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -34,6 +35,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // create a UIControl on top of the view
+    
     // XXX temporarily hard-coded
     CCCurrency *usd = [[CCCurrency alloc] initWithName:@"USD" value:[NSNumber numberWithFloat:1]];
     CCCurrency *yuan = [[CCCurrency alloc] initWithName:@"Chinese Yuan" value:[NSNumber numberWithFloat:6.4]];
@@ -44,10 +47,13 @@
     self.pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
     [self.view addSubview:self.pickerView];
     
-    self.originalCurrency.frame = CGRectMake(self.view.frame.origin.x + 20, 100, self.view.frame.size.width / 2 - 30, 50);
-    self.finalCurrency.frame = CGRectMake(self.originalCurrency.frame.origin.x + self.originalCurrency.frame.size.width + 20, self.originalCurrency.frame.origin.y, self.originalCurrency.frame.size.width, self.originalCurrency.frame.size.height);
-    [self.view addSubview:self.originalCurrency];
-    [self.view addSubview:self.finalCurrency];
+    self.originalCurrencyTextField.frame = CGRectMake(self.view.frame.origin.x + 20, 100, self.view.frame.size.width / 2 - 30, 50);
+    self.finalCurrencyTextField.frame = CGRectMake(self.originalCurrencyTextField.frame.origin.x + self.originalCurrencyTextField.frame.size.width + 20, self.originalCurrencyTextField.frame.origin.y, self.originalCurrencyTextField.frame.size.width, self.originalCurrencyTextField.frame.size.height);
+    [self.view addSubview:self.originalCurrencyTextField];
+    [self.view addSubview:self.finalCurrencyTextField];
+    
+    // make keyboards disappear when you click on background
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
     
     
 }
@@ -56,6 +62,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dismissKeyboard {
+    [self.originalCurrencyTextField resignFirstResponder];
+    [self.finalCurrencyTextField resignFirstResponder];
 }
 
 #pragma mark - pickerview delegates
@@ -98,28 +109,34 @@
     return _pickerView;
 }
 
-- (UITextField *) originalCurrency {
-    if (!_originalCurrency) {
-        _originalCurrency = [[UITextField alloc] init];
-        [_originalCurrency setFont:[UIFont systemFontOfSize:16]];
-        [_originalCurrency setPlaceholder:@"Original Amount"];
-        [_originalCurrency setKeyboardType:UIKeyboardTypeDecimalPad];
-        [_originalCurrency setBorderStyle:UITextBorderStyleRoundedRect];
+- (UITextField *) originalCurrencyTextField {
+    if (!_originalCurrencyTextField) {
+        _originalCurrencyTextField = [[UITextField alloc] init];
+        [_originalCurrencyTextField setFont:[UIFont systemFontOfSize:16]];
+        [_originalCurrencyTextField setPlaceholder:@"Original Amount"];
+        [_originalCurrencyTextField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [_originalCurrencyTextField setBorderStyle:UITextBorderStyleRoundedRect];
     }
     
-    return _originalCurrency;
+    return _originalCurrencyTextField;
 }
 
-- (UITextField *) finalCurrency {
-    if (!_finalCurrency) {
-        _finalCurrency = [[UITextField alloc] init];
-        [_finalCurrency setFont:[UIFont systemFontOfSize:16]];
-        [_finalCurrency setPlaceholder:@"Final Amount"];
-        [_finalCurrency setKeyboardType:UIKeyboardTypeDecimalPad];
-        [_finalCurrency setBorderStyle:UITextBorderStyleRoundedRect];
+- (UITextField *) finalCurrencyTextField {
+    if (!_finalCurrencyTextField) {
+        _finalCurrencyTextField = [[UITextField alloc] init];
+        [_finalCurrencyTextField setFont:[UIFont systemFontOfSize:16]];
+        [_finalCurrencyTextField setPlaceholder:@"Final Amount"];
+        [_finalCurrencyTextField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [_finalCurrencyTextField setBorderStyle:UITextBorderStyleRoundedRect];
     }
     
-    return _finalCurrency;
+    return _finalCurrencyTextField;
 }
 
+- (UITapGestureRecognizer *) tapGestureRecognizer {
+    if (!_tapGestureRecognizer) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    }
+    return  _tapGestureRecognizer;
+}
 @end
