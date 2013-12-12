@@ -77,12 +77,15 @@
 
 - (UIButton *) currencyButton {
     if (!_currencyButton) {
-        _currencyButton = [[UIButton alloc] init];
+        _currencyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         
         [_currencyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_currencyButton setTitle:@"Press me!" forState:UIControlStateNormal];
+        [_currencyButton setTitle:@"Convert Currency!" forState:UIControlStateNormal];
         [_currencyButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-        [_currencyButton setBackgroundColor:[UIColor redColor]];
+        [_currencyButton setBackgroundColor:[UIColor whiteColor]];
+//        [_currencyButton.layer setBorderColor:CFBridgingRetain([UIColor blackColor])];
+        [_currencyButton.layer setBorderWidth:2];
+        [_currencyButton.layer setBorderColor: [[UIColor blackColor] CGColor]];
         [_currencyButton addTarget:self action:@selector(currencyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     

@@ -35,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // create a UIControl on top of the view
+    self.title = @"Currency Converter";
     
     // XXX temporarily hard-coded
     CCCurrency *usd = [[CCCurrency alloc] initWithName:@"USD" value:[NSNumber numberWithFloat:1]];
@@ -67,11 +67,41 @@
 - (void) dismissKeyboard {
     [self.originalCurrencyTextField resignFirstResponder];
     [self.finalCurrencyTextField resignFirstResponder];
+    
+    [self calculateExchangeRate];
+}
+
+- (void) calculateExchangeRate {
+
+    NSInteger row1 = [self.pickerView selectedRowInComponent:0];
+    NSInteger row2 = [self.pickerView selectedRowInComponent:1];
+    
+    CCCurrency *originalCurrency = [self.currencyArray objectAtIndex:row1];
+    CCCurrency *finalCurrency = [self.currencyArray objectAtIndex:row2];
+    
+    CGFloat exchangeRate = [finalCurrency.value floatValue] / [originalCurrency.value floatValue];
+    
+    CGFloat finalValue = [self.originalCurrencyTextField.text floatValue] * exchangeRate;
+    self.finalCurrencyTextField.text = [NSString stringWithFormat:@"%.2f", finalValue];
+    
 }
 
 #pragma mark - pickerview delegates
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     // implement selector here
+    
+    if ([self.currencyArray count] > row) {
+        CCCurrency *currency = [self.currencyArray objectAtIndex:row];
+        if (component == 0) {
+            [self.originalCurrencyTextField setPlaceholder:currency.name];
+        }
+        else if (component == 1) {
+            [self.finalCurrencyTextField setPlaceholder:currency.name];
+        }
+        
+        [self calculateExchangeRate];
+    }
+    
 }
 
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -113,9 +143,15 @@
     if (!_originalCurrencyTextField) {
         _originalCurrencyTextField = [[UITextField alloc] init];
         [_originalCurrencyTextField setFont:[UIFont systemFontOfSize:16]];
-        [_originalCurrencyTextField setPlaceholder:@"Original Amount"];
+//        [_originalCurrencyTextField setPlaceholder:@"Original Amount"];
         [_originalCurrencyTextField setKeyboardType:UIKeyboardTypeDecimalPad];
         [_originalCurrencyTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    }
+    
+    NSInteger row = [self.pickerView selectedRowInComponent:0];
+    if ([self.currencyArray count] > row) {
+        CCCurrency *currency = [self.currencyArray objectAtIndex:row];
+        [_originalCurrencyTextField setPlaceholder: currency.name];
     }
     
     return _originalCurrencyTextField;
@@ -125,11 +161,17 @@
     if (!_finalCurrencyTextField) {
         _finalCurrencyTextField = [[UITextField alloc] init];
         [_finalCurrencyTextField setFont:[UIFont systemFontOfSize:16]];
-        [_finalCurrencyTextField setPlaceholder:@"Final Amount"];
+//        [_finalCurrencyTextField setPlaceholder:@"Final Amount"];
         [_finalCurrencyTextField setKeyboardType:UIKeyboardTypeDecimalPad];
         [_finalCurrencyTextField setBorderStyle:UITextBorderStyleRoundedRect];
+        [_finalCurrencyTextField setUserInteractionEnabled:NO];
     }
     
+    NSInteger row = [self.pickerView selectedRowInComponent:1];
+    if ([self.currencyArray count] > row) {
+        CCCurrency *currency = [self.currencyArray objectAtIndex:row];
+        [_finalCurrencyTextField setPlaceholder:currency.name];
+    }
     return _finalCurrencyTextField;
 }
 
