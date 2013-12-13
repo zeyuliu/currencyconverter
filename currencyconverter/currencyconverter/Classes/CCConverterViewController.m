@@ -39,9 +39,27 @@
     
     // XXX temporarily hard-coded
     CCCurrency *usd = [[CCCurrency alloc] initWithName:@"USD" value:[NSNumber numberWithFloat:1]];
-    CCCurrency *yuan = [[CCCurrency alloc] initWithName:@"Chinese Yuan" value:[NSNumber numberWithFloat:6.4]];
+    CCCurrency *yuan = [[CCCurrency alloc] initWithName:@"Chinese Yuan" value:[NSNumber numberWithFloat:6.07]];
+     CCCurrency *euro = [[CCCurrency alloc] initWithName:@"Euro" value:[NSNumber numberWithFloat:.73]];
+    CCCurrency *dinar = [[CCCurrency alloc] initWithName:@"Algerian Dinar" value:[NSNumber numberWithFloat:78.41]];
+    CCCurrency *koruna = [[CCCurrency alloc] initWithName:@"Czech Republic Koruna" value:[NSNumber numberWithFloat:20]];
+    CCCurrency *naira = [[CCCurrency alloc] initWithName:@"Nigerian Naira" value:[NSNumber numberWithFloat:158.48]];
+    CCCurrency *lira = [[CCCurrency alloc] initWithName:@"Turkish Lira" value:[NSNumber numberWithFloat:2.04]];
+    CCCurrency *pound = [[CCCurrency alloc] initWithName:@"British Pound Sterling" value:[NSNumber numberWithFloat:.61]];
+    CCCurrency *yen = [[CCCurrency alloc] initWithName:@"Japanese Yen" value:[NSNumber numberWithFloat:103.82]];
+    CCCurrency *ruble = [[CCCurrency alloc] initWithName:@"Russian Ruble" value:[NSNumber numberWithFloat:32.81]];
     [self.currencyArray addObject:usd];
     [self.currencyArray addObject:yuan];
+    [self.currencyArray addObject:euro];
+    [self.currencyArray addObject:dinar];
+    [self.currencyArray addObject:koruna];
+    [self.currencyArray addObject:naira];
+    [self.currencyArray addObject:lira];
+    [self.currencyArray addObject:pound];
+    [self.currencyArray addObject:yen];
+    [self.currencyArray addObject:ruble];
+    
+    
     
     // XXX 162 is default size of picker view
     self.pickerView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 162, self.view.frame.size.width, 162);

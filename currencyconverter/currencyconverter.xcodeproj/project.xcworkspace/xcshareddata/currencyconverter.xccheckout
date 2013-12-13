@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AD278E56-70F7-4CE3-A634-6F68F8EB2CCA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>currencyconverter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4860BB63-6DDC-46F5-A7C8-788E792304C4</key>
+		<string>ssh://github.com/zeyuliu/currencyconverter.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>currencyconverter/currencyconverter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4860BB63-6DDC-46F5-A7C8-788E792304C4</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/zeyuliu/currencyconverter.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4860BB63-6DDC-46F5-A7C8-788E792304C4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4860BB63-6DDC-46F5-A7C8-788E792304C4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>currencyconverter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
